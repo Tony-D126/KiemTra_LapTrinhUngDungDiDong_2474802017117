@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KiemTra_LapTrinhUngDungDiDong_2474802017117</string>
+    <string name="profile_title">Thông tin tài khoản</string>
+    <string name="btn_logout">Đăng xuất</string>
 </resources>
