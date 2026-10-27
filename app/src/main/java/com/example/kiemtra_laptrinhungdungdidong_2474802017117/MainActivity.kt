@@ -1,20 +1,40 @@
 package com.example.kiemtra_laptrinhungdungdidong_2474802017117
 
+import android.graphics.Color
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Patterns
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val edtEmail = findViewById<EditText>(R.id.edtEmail)
+        val edtPassword = findViewById<EditText>(R.id.edtPassword)
+        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val tvStatus = findViewById<TextView>(R.id.tvStatus)
+
+        btnLogin.setOnClickListener {
+            val email = edtEmail.text.toString().trim()
+            val password = edtPassword.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                tvStatus.setTextColor(Color.RED)
+                tvStatus.text = "Vui lòng nhập đầy đủ Email và Mật khẩu!"
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                tvStatus.setTextColor(Color.RED)
+                tvStatus.text = "Email không đúng định dạng!"
+            } else if (password.length < 6) {
+                tvStatus.setTextColor(Color.RED)
+                tvStatus.text = "Mật khẩu phải có ít nhất 6 ký tự!"
+            } else {
+                tvStatus.setTextColor(Color.GREEN)
+                tvStatus.text = "Xác thực thành công!"
+            }
         }
     }
 }
